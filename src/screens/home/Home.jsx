@@ -8,6 +8,24 @@ const Home = () => {
 
     return (
         <div className="home-layout">
+            <div className="rixon">
+                <div className="joao-vitor">
+                    <ul>
+                        <li className="active">
+                            <a href="/home">Valdenir</a>
+                        </li>
+                        <li><a href="/products">Flauzino</a></li>
+                        <li><a href="/react">Valdenir</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div className="celular">
+                <div className="iphone">
+                    <h1>Iphone 14</h1>
+                    <p>Paragrafo</p>
+                </div>
+            </div>
+
             <Table striped bordered hover className="mt-4">
                 <thead>
                     <tr>

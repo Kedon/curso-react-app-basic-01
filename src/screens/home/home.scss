@@ -1,0 +1,31 @@
+.home-layout {
+    .rixon {
+        background: red;
+        .joao-vitor {
+            ul {
+                li {
+                    background: blue;
+                    a {
+                        color: white;
+                        &:hover {
+                            background: yellow;
+                        }
+                    }
+                    &.active {
+                        background: greenyellow;
+                    }
+                }
+            }
+        }
+    }
+    .celular {
+        .iphone {
+            h1 {
+
+            }
+            p {
+
+            }
+        }
+    }
+}
