@@ -2,6 +2,28 @@ import React, { useState, useEffect } from 'react';
 import './home.scss';
 import { Button, Table, Card, Form, Modal } from 'react-bootstrap';
 import moment from 'moment';
+import Slider from './components/Slider';
+
+const slider1 = [
+    {
+        src: 'https://www.simplilearn.com/ice9/free_resources_article_thumb/Advantages_and_Disadvantages_of_artificial_intelligence.jpg',
+        alt: 'First slide',
+        title: 'First slide label',
+        caption: 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
+    },
+    {
+        src: 'https://www.simplilearn.com/ice9/free_resources_article_thumb/Advantages_and_Disadvantages_of_artificial_intelligence.jpg',
+        alt: 'Second slide',
+        title: 'Second slide label',
+        caption: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+    },
+    {
+        src: 'https://www.simplilearn.com/ice9/free_resources_article_thumb/Advantages_and_Disadvantages_of_artificial_intelligence.jpg',
+        alt: 'Third slide',
+        title: 'Third slide label',
+        caption: 'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
+    }
+]
 
 const selectOptions = [
     { value: 'Brasil', label: 'Brasil' },
@@ -89,97 +111,9 @@ const Home = () => {
 
     return (
         <div className="home-layout">
-            <h1>Na próxima aula, ensinar o conceito de atualização</h1>
-            <Modal show={modal}>
-                <Modal.Header closeButton>
-                    <Modal.Title>Modal title</Modal.Title>
-                </Modal.Header>
-
-                <Modal.Body>
-                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                        <Form.Label>Nome</Form.Label>
-                        <Form.Control name="name" type="text" value={fields.name} placeholder="Seu nome" onChange={changeInputField} />
-                        <Form.Text className="text-muted">
-                            We'll never share your email with anyone else.
-                        </Form.Text>
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>Sobrenome</Form.Label>
-                        <Form.Control name="lastName" type="text" value={fields.lastName} placeholder="Sobrenome" onChange={changeInputField} />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="formBasicPassword">
-                        <Form.Label>User name</Form.Label>
-                        <Form.Control name="userName" type="text" value={fields.userName} placeholder="Nome de usuário" onChange={changeInputField} />
-                    </Form.Group>
-
-                    <Form.Select aria-label="Default select example" name="country" onChange={changeInputField} value={fields.select}>
-                        <option>Selecione um país</option>
-                        {selectOptions.map(item =>
-                            <option key={`option_${item.value}`} value={item.value}>{item.label}</option>
-                        )}
-                    </Form.Select>
-
-                </Modal.Body>
-
-                <Modal.Footer>
-                    <Button variant="secondary" onClick={toggleModal}>Close</Button>
-                    {fields.id ? <Button variant="secondary" onClick={handleUpdateField}>Update changes</Button>
-                    : <Button variant="primary" onClick={handleAddField}>Save changes</Button>}
-                </Modal.Footer>
-            </Modal>
-
-            <Button variant="primary" onClick={toggleModal}>
-                Abrir modal
-            </Button>
-            <Table striped bordered hover className="mt-4">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Data</th>
-                        <th>Nome</th>
-                        <th>Sobrenome</th>
-                        <th>Nome de Usuário</th>
-                        <th>Select</th>
-                        <th>Ações</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {rows.map((item, index) =>
-                        <tr key={item.id}>
-                            <td>{item.id}</td>
-                            <td>{item.date}</td>
-                            <td>{item.name}</td>
-                            <td>{item.lastName}</td>
-                            <td>{item.userName}</td>
-                            <td>{item.country}</td>
-                            <td>
-                                <Button variant="danger" onClick={() => handleDelete(index)}>
-                                    Apagar
-                                </Button>
-                                <Button variant="success" onClick={() => handleEdit(item)}>
-                                    Editar
-                                </Button>
-                            </td>
-                        </tr>
-                    )}
-                </tbody>
-            </Table>
-            {/* <div className="content">
-                <Card style={{ width: '18rem' }}>
-                    <Card.Img variant="top" src={require('../../assets/img/logo-og.png')} />
-                    <Card.Body>
-                        <Card.Title>Card Title</Card.Title>
-                        <Card.Text>
-                            Some quick example text to build on the card title and make up the
-                            bulk of the card's content.
-                        </Card.Text>
-                        <Button variant="primary">Go somewhere</Button>
-                    </Card.Body>
-                </Card>
-            </div> */}
-            {/* <Button variant="primary">Primary</Button>{' '} */}
+            <h1>Home</h1>
+            <Slider data={slider1} />
+            <Slider data={slider1} />
         </div>
     )
 };
