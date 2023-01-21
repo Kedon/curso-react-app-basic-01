@@ -112,11 +112,11 @@ const Home = () => {
         setRows([...rows, newData])
     }
 
-    function handleUpdateField(){
+    function handleUpdateField() {
         //fields
         console.log(fields)
-        setRows(ro => ro.map( item => {
-            if(item.id === fields.id){
+        setRows(ro => ro.map(item => {
+            if (item.id === fields.id) {
                 item = fields
             }
             return item
@@ -139,7 +139,13 @@ const Home = () => {
             <h1>Home</h1>
             <Slider data={slider1} />
             <div className="mt-4 mb-4">
-                <Cards data={cards} />
+                <Row>
+                    {cards.map((card, index) => (
+                        <Col key={index}>
+                            <Cards data={card} />
+                        </Col>
+                    ))}
+                </Row>
             </div>
         </div>
     )
