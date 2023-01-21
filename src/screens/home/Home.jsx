@@ -5,6 +5,10 @@ import moment from 'moment';
 import Slider from './components/Slider';
 import Cards from './components/Cards';
 import { Row, Col } from 'react-bootstrap';
+import Avatar from '../../components/avatar/Avatar';
+import UserInfo from '../../components/userInfo/UserInfo';
+import { Phone } from 'react-feather';
+import axios from 'axios';
 
 const slider1 = [
     {
@@ -35,17 +39,17 @@ const cards = [
     },
     {
         src: 'https://www.simplilearn.com/ice9/free_resources_article_thumb/Advantages_and_Disadvantages_of_artificial_intelligence.jpg',
-        title: 'First slide label',
+        title: 'Second slide label',
         text: 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
     },
     {
         src: 'https://www.simplilearn.com/ice9/free_resources_article_thumb/Advantages_and_Disadvantages_of_artificial_intelligence.jpg',
-        title: 'First slide label',
+        title: 'Third slide label',
         text: 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
     },
     {
         src: 'https://www.simplilearn.com/ice9/free_resources_article_thumb/Advantages_and_Disadvantages_of_artificial_intelligence.jpg',
-        title: 'First slide label',
+        title: 'Forth slide label',
         text: 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
     }
 ]
@@ -58,9 +62,6 @@ const selectOptions = [
 
 
 const Home = () => {
-
-    const initialData = localStorage.getItem('people') ? JSON.parse(localStorage.getItem('people')) : []
-
     const [modal, showModal] = useState(false)
 
     const [fields, changeFields] = useState({
@@ -72,7 +73,7 @@ const Home = () => {
         country: ''
     })
 
-    const [rows, setRows] = useState(initialData)
+    const [rows, setRows] = useState([])
 
     useEffect(() => {
         if (!modal) {
@@ -86,6 +87,15 @@ const Home = () => {
             })
         }
     }, [modal])
+
+    useEffect(() => {
+        axios.get('https://jsonplaceholder.typicode.com/users')
+            .then(res => {
+                setRows(res.data)
+            }).catch(err => {
+                console.log(err)
+            })
+    }, [])
 
 
     function toggleModal() {
@@ -134,15 +144,63 @@ const Home = () => {
         setRows(rows.filter((item, i) => i != index))
     }
 
+    function onClickOnButton(info) {
+        alert(JSON.stringify(info))
+    }
+
+
+    const data = [
+        {
+            name: 'Valdenir Flauzino',
+            description: 'valdenir@kedon.com.br',
+            level: 'Administrador',
+        },
+        {
+            name: 'Heydion',
+            description: 'heydion@kedon.com.br',
+            level: 'Manager',
+        }
+    ]
+
     return (
         <div className="home-layout">
             <h1>Home</h1>
+            {rows/*.slice(0, 4)*/.filter(f => f.id < 10 ).map((item, index) => 
+                <UserInfo name={item.name} description={item.email} />    
+            )}
+
+            <table className="table table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Username</th>
+                        <th scope="col">Website</th>
+                        <th scope="col">Company</th>
+                        <th scope="col">City</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {rows.map((item, index) =>
+                    <tr>
+                        <td scope="col">{item.name}</td>
+                        <td scope="col">{item.email}</td>
+                        <td scope="col">{item.phone}</td>
+                        <td scope="col">{item.username}</td>
+                        <td scope="col">{item.website}</td>
+                        <td scope="col">{item.company.name}</td>
+                        <td scope="col">{item.address.street}</td>
+                    </tr>
+                    )}
+                </tbody>
+            </table>
             <Slider data={slider1} />
             <div className="mt-4 mb-4">
                 <Row>
-                    {cards.map((card, index) => (
+                    {cards.slice(0, 4).map((card, index) => (
                         <Col key={index}>
-                            <Cards data={card} />
+                            <Cards data={card} handleClick={onClickOnButton} />
                         </Col>
                     ))}
                 </Row>

@@ -1,0 +1,19 @@
+.ui-user-info {
+    display: flex;
+    align-items: center;
+    .ui-user-info-avatar {
+        margin-right: 10px;
+    }
+    .ui-user-info-description {
+        .ui-user-info-name {
+            font-size: 16px;
+            line-height: 12px;
+            font-weight: 500;
+            color: #000;
+        }
+        .ui-user-info-caption {
+            font-size: 14px;
+            color: rgb(83, 83, 83);
+        }
+    }
+}

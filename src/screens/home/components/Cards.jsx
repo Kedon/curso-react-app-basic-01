@@ -4,8 +4,7 @@ import Card from 'react-bootstrap/Card';
 
 
 
-const Cards = ({ data }) => {
-
+const Cards = ({ data, handleClick }) => {
     return (
         <Card>
             <Card.Img variant="top" src={data.src} />
@@ -14,7 +13,7 @@ const Cards = ({ data }) => {
                 <Card.Text>
                     {data.text}
                 </Card.Text>
-                <Button variant="primary">Go somewhere</Button>
+                <Button variant="primary" onClick={() => handleClick(data)}>Go somewhere</Button>
             </Card.Body>
         </Card>       
     );
