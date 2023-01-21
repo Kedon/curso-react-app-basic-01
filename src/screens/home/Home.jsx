@@ -3,6 +3,8 @@ import './home.scss';
 import { Button, Table, Card, Form, Modal } from 'react-bootstrap';
 import moment from 'moment';
 import Slider from './components/Slider';
+import Cards from './components/Cards';
+import { Row, Col } from 'react-bootstrap';
 
 const slider1 = [
     {
@@ -22,6 +24,29 @@ const slider1 = [
         alt: 'Third slide',
         title: 'Third slide label',
         caption: 'Praesent commodo cursus magna, vel scelerisque nisl consectetur.'
+    }
+]
+
+const cards = [
+    {
+        src: 'https://www.simplilearn.com/ice9/free_resources_article_thumb/Advantages_and_Disadvantages_of_artificial_intelligence.jpg',
+        title: 'First slide label',
+        text: 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
+    },
+    {
+        src: 'https://www.simplilearn.com/ice9/free_resources_article_thumb/Advantages_and_Disadvantages_of_artificial_intelligence.jpg',
+        title: 'First slide label',
+        text: 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
+    },
+    {
+        src: 'https://www.simplilearn.com/ice9/free_resources_article_thumb/Advantages_and_Disadvantages_of_artificial_intelligence.jpg',
+        title: 'First slide label',
+        text: 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
+    },
+    {
+        src: 'https://www.simplilearn.com/ice9/free_resources_article_thumb/Advantages_and_Disadvantages_of_artificial_intelligence.jpg',
+        title: 'First slide label',
+        text: 'Nulla vitae elit libero, a pharetra augue mollis interdum.'
     }
 ]
 
@@ -113,7 +138,9 @@ const Home = () => {
         <div className="home-layout">
             <h1>Home</h1>
             <Slider data={slider1} />
-            <Slider data={slider1} />
+            <div className="mt-4 mb-4">
+                <Cards data={cards} />
+            </div>
         </div>
     )
 };
