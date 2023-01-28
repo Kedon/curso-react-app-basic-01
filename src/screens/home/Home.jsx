@@ -148,6 +148,18 @@ const Home = () => {
         alert(JSON.stringify(info))
     }
 
+    function handleCreatePost(){
+        axios.post('https://jsonplaceholder.typicode.com/posts', {
+            title: 'foo',
+            body: 'bar',
+            userId: 1,
+        }).then(res => {
+                console.log(res)
+            }).catch(err => {
+                console.log(err)
+            })
+    }
+
 
     const data = [
         {
@@ -168,6 +180,8 @@ const Home = () => {
             {rows/*.slice(0, 4)*/.filter(f => f.id < 10 ).map((item, index) => 
                 <UserInfo name={item.name} description={item.email} />    
             )}
+
+            <button onClick={handleCreatePost}>test post</button>
 
             <table className="table table-striped">
                 <thead>
