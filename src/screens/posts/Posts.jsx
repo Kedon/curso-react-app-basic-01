@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Avatar from '../../components/avatar/Avatar';
 import './posts.scss';
+import PostComments from './componets/PostComments';
+import {  Modal, Button } from 'react-bootstrap';
 
 
 const Posts = () => {
@@ -13,6 +15,7 @@ const Posts = () => {
         title: '',
         body: ''
     });
+    const [postToEdit, setPostToEdit] = useState(null);
 
     useEffect(() => {
         axios.get('https://jsonplaceholder.typicode.com/posts')
@@ -52,28 +55,6 @@ const Posts = () => {
         })
     }
 
-    const postComments = (id) => {
-        const commet = comments.filter( f => f.postId === id);
-        return  <div className="post-comments-container">
-                    {commet.length === 0 ?
-                    <div class="see-commets" onClick={() => loadPostCommnets(id)}>
-                        Ver comemrtários
-                    </div> :
-                    <div className="post-comments">
-                    {commet.map(c =>
-                        <div key={c.id} className="post-comment">
-                            <h5>{c.name}</h5>
-                            <p>{c.body}</p>
-                            <small>{c.email}</small>
-                        </div>
-                    )}
-                    </div>
-            }
-                    
-                    
-                </div>;
-    }
-
     const loadPostCommnets = (id) => {
         axios.get(`https://jsonplaceholder.typicode.com/posts/${id}/comments`)
         .then(res => {
@@ -101,8 +82,13 @@ const Posts = () => {
         })
     }
 
+    const handleToggleEditPost = (post) => {
+        setPostToEdit( prevState => !prevState ? post : null);
+    }
+
     return (
         <div>
+            
             <div className="create-post">
                 <input placeholder="Título do post" value={fields.title} name="title" onChange={handleInputChange} />
                 <textarea placeholder="conteúdo do post" value={fields.body} name="body" onChange={handleInputChange}></textarea>
@@ -113,9 +99,27 @@ const Posts = () => {
                     <h2>{post.title}</h2>
                     <p>{post.body}</p>
                     {userData(post.userId)}
-                    {postComments(post.id)}
+                    <PostComments 
+                        comments={comments.filter( f => f.postId === post.id)}
+                        id={post.id}
+                        handleClick={loadPostCommnets}
+                    />
+                    <button onClick={() => handleToggleEditPost(post)}>Editar</button>
+                    <button>Excluir</button>
                 </div>
             )}
+            <Modal show={postToEdit}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Editar comentário</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>
+                    {JSON.stringify(postToEdit)}
+                </Modal.Body>
+                <Modal.Footer>
+                    <Button variant="secondary" onClick={handleToggleEditPost}>Close</Button>
+                    <Button variant="primary">Save changes</Button>
+                </Modal.Footer>
+            </Modal>
         </div>
     );
 
